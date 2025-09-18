@@ -11,8 +11,8 @@ import {
 import { products } from '../data/data';
 
 const { width, height } = Dimensions.get('window');
-const ITEM_WIDTH = (width - 30) / 2;
-const ITEM_HEIGHT = (height - 120) / 5;
+const ITEM_WIDTH = (width - 60) / 2;
+const ITEM_HEIGHT = (height - 150) / 5;
 
 const ProductList = ({ navigation }: any) => {
   const pageSize = 10; // 10개씩 보여야함
@@ -34,7 +34,8 @@ const ProductList = ({ navigation }: any) => {
     >
       <Image source={{ uri: item.image }} style={styles.image} />
       <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.price}>{item.salePrice}원</Text>
+      <Text style={styles.price}>{item.originalPrice}원</Text>
+      <Text style={styles.disprice}>{item.salePrice}원</Text>
     </TouchableOpacity>
   );
 
@@ -57,7 +58,7 @@ export default ProductList;
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding: 10,
+    padding: 20,
   },
   row: {
     justifyContent: 'space-between',
@@ -93,5 +94,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'gray',
     textAlign: 'center',
+    textDecorationLine: 'line-through',
+  },
+  disprice: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#e60012', // 배민 느낌 빨간색
+    marginTop: 2,
   },
 });

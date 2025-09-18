@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ProductList from './src/screen/ProductList';
 import ProductDetail from './src/screen/ProductDetail';
 import CartScreen from './src/screen/Cart';
+import Home from './src/screen/First';
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,6 @@ const InitCart = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// 배지 없이 단순 아이콘
 const CartIcon = () => {
   const navigation = useNavigation<any>();
 
@@ -44,7 +44,7 @@ const CartIcon = () => {
       style={{ marginRight: 15 }}
       onPress={() => navigation.navigate('Cart')}
     >
-      <Icon name="heart" size={24} color="black" />
+      <Icon name="cart" size={24} color="black" />
     </TouchableOpacity>
   );
 };
@@ -54,7 +54,12 @@ export default function App() {
     <Provider store={redux}>
       <InitCart>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="ProductList">
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="ProductList"
               component={ProductList}

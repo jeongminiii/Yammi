@@ -4,9 +4,9 @@ import {
   Text,
   Image,
   StyleSheet,
-  ScrollView,
   Button,
   Alert,
+  TouchableOpacity,
 } from 'react-native';
 import { products } from '../data/data';
 import { useDispatch } from 'react-redux';
@@ -28,6 +28,7 @@ const ProductDetail = ({ route, navigation }: any) => {
         price: product.salePrice,
         image: product.image,
         quantity: 1, //수량
+        originalprice: product.originalPrice,
       }),
     );
 
@@ -38,24 +39,46 @@ const ProductDetail = ({ route, navigation }: any) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.view}>
       <Image source={{ uri: product.image }} style={styles.image} />
       <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.price}>원가: {product.originalPrice}원</Text>
-      <Text style={styles.salePrice}>할인가: {product.salePrice}원</Text>
       <Text style={styles.description}>{product.description}</Text>
-      <Button title="장바구니 담기" onPress={handleAddToCart} />
-    </ScrollView>
+      <Text style={styles.price}>가격 : {product.originalPrice}원</Text>
+      <Text style={styles.salePrice}>할인가 : {product.salePrice}원</Text>
+
+      <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
+        <Text style={styles.buttonText}>장바구니 담기</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 export default ProductDetail;
 
 const styles = StyleSheet.create({
-  container: { padding: 20, alignItems: 'center' },
-  image: { width: 250, height: 250, borderRadius: 10, marginBottom: 20 },
+  view: {
+    padding: 20,
+  },
+  image: {
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
   name: { fontSize: 20, fontWeight: 'bold', marginBottom: 10 },
-  price: { fontSize: 16, color: 'gray', marginBottom: 5 },
-  salePrice: { fontSize: 18, color: 'red', marginBottom: 15 },
-  description: { fontSize: 16, textAlign: 'center', marginBottom: 20 },
+  price: { fontSize: 16, color: 'gray', marginBottom: 10 },
+  salePrice: { fontSize: 17, color: 'red', marginBottom: 15 },
+  description: { fontSize: 14, marginBottom: 20 },
+  button: {
+    backgroundColor: '#FF6347',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignItems: 'center', // 텍스트 가운데 정렬
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
