@@ -25,7 +25,8 @@ cd yammi
 - ios 빌드
   npx react-native run-ios
 
-# 폴더 구조
+```bash
+## 🗂 폴더 구조
 
 Yammi/
 ├── App.tsx
@@ -44,17 +45,17 @@ Yammi/
 ├── android/ # Android 빌드 관련 파일
 ├── ios/ # iOS 빌드 관련 파일
 └── package.json
+```
 
 ## 🛠️ 기술 스택
 
-Framework: React Native
-State Management: Redux Toolkit
-Storage: AsyncStorage
-Navigation: React Navigation
-Icons: react-native-vector-icons
-Build: Xcode (iOS), Gradle (Android)
-
-상태관리: Redux
-비동기: axios
-스타일: StyleSheet
-스토리지: @react-native-async-storage/async-storage (장바구니/재시작 복원용)
+- **Framework:** React Native
+- **State Management:** Redux Toolkit
+- **Storage:** AsyncStorage
+- **Navigation:** React Navigation
+- **Icons:** react-native-vector-icons
+- **Build:** Xcode (iOS), Gradle (Android)
+- **상태관리:** Redux
+- **비동기:** axios
+- **스타일:** StyleSheet
+- **스토리지:** @react-native-async-storage/async-storage (장바구니/재시작 복원용)
