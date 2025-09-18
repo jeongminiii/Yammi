@@ -23,11 +23,10 @@ cd yammi
 - 패키지 설치
 npm install
 
-- ios 실행
+- ios 빌드
 npx react-native run-ios
 
-
-## 폴더 구조
+### 폴더 구조
 
 Yammi/
 ├── App.tsx
@@ -47,7 +46,7 @@ Yammi/
 ├── ios/ # iOS 빌드 관련 파일
 └── package.json
 
-## 🛠️ 기술 스택
+#### 🛠️ 기술 스택
 
 Framework: React Native
 State Management: Redux Toolkit

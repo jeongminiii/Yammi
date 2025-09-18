@@ -39,12 +39,8 @@ const CartScreen = () => {
       return;
     }
 
-    const selectedProducts = cart.filter(item =>
-      selectedItems.includes(item.id),
-    );
-
     Alert.alert(
-      `총 ${selectedProducts.length}개 상품 주문 완료!\n결제금액 : ${selectedTotal}원`,
+      `총 ${selectedTotalQuantity}개 상품 주문 완료!\n결제금액 : ${selectedTotal}원`,
     );
     selectedItems.forEach(id => {
       dispatch(removeFromCart(id));
