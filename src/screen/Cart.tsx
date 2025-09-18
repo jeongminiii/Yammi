@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../action/redux';
@@ -15,8 +16,43 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const CartScreen = () => {
   const cart = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch<AppDispatch>();
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
+  const selectedTotalQuantity = cart
+    .filter(item => selectedItems.includes(item.id))
+    .reduce((sum, item) => sum + item.quantity, 0);
+
+  const selectedTotal = cart
+    .filter(item => selectedItems.includes(item.id))
+    .reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const toggleSelect = (id: number) => {
+    setSelectedItems(prev =>
+      prev.includes(id) ? prev.filter(itemId => itemId !== id) : [...prev, id],
+    );
+  };
+
+  const handleOrderSelected = () => {
+    if (selectedItems.length === 0) {
+      Alert.alert('주문할 상품을 선택해주세요.');
+      return;
+    }
+
+    const selectedProducts = cart.filter(item =>
+      selectedItems.includes(item.id),
+    );
+
+    Alert.alert(
+      `총 ${selectedProducts.length}개 상품 주문 완료!\n결제금액 : ${selectedTotal}원`,
+    );
+    selectedItems.forEach(id => {
+      dispatch(removeFromCart(id));
+    });
+
+    // 선택 초기화
+    setSelectedItems([]);
+  };
 
   return (
     <View style={styles.container}>
@@ -25,6 +61,21 @@ const CartScreen = () => {
         keyExtractor={item => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.item}>
+            <TouchableOpacity
+              style={{ marginRight: 20 }}
+              onPress={() => toggleSelect(item.id)}
+            >
+              <Icon
+                name={
+                  selectedItems.includes(item.id)
+                    ? 'checkbox'
+                    : 'square-outline'
+                }
+                size={24}
+                color={selectedItems.includes(item.id) ? 'tomato' : 'gray'}
+              />
+            </TouchableOpacity>
+
             <Image source={{ uri: item.image }} style={styles.image} />
             <View style={{ flex: 1, marginLeft: 10 }}>
               <Text style={styles.name}>{item.name}</Text>
@@ -65,7 +116,7 @@ const CartScreen = () => {
                   style={[styles.qtyButton, { backgroundColor: '#333' }]}
                   onPress={() => dispatch(removeFromCart(item.id))}
                 >
-                  <Icon name="trash" size={24} color="white" />
+                  <Icon name="trash" size={20} color="white" />
                 </TouchableOpacity>
               </View>
             </View>
@@ -78,14 +129,15 @@ const CartScreen = () => {
 
       <View style={styles.footer}>
         <View style={styles.Row}>
-          <Text style={styles.totalmenu}>총 메뉴 수</Text>
-          <Text style={styles.totalmenu}>{totalQuantity} 개</Text>
+          <Text style={styles.totalmenu}>선택한 메뉴 수</Text>
+          <Text style={styles.totalmenu}>{selectedTotalQuantity} 개</Text>
         </View>
 
         <View style={styles.Row}>
-          <Text style={styles.total}>결제예정금액</Text>
-          <Text style={styles.total}> {total} 원</Text>
+          <Text style={styles.total}>결제 상품 금액</Text>
+          <Text style={styles.total}>{selectedTotal} 원</Text>
         </View>
+
         <View style={styles.Row}>
           <TouchableOpacity
             style={[
@@ -103,9 +155,10 @@ const CartScreen = () => {
               styles.qtyButton,
               { backgroundColor: '#333', marginTop: 10 },
             ]}
+            onPress={handleOrderSelected}
           >
             <Text style={[styles.qtyButtonText, { color: 'white' }]}>
-              주문하기{' '}
+              주문하기
             </Text>
           </TouchableOpacity>
         </View>
@@ -154,7 +207,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 160,
+    height: 190,
     backgroundColor: '#fff',
     paddingVertical: 15,
     paddingHorizontal: 20,
