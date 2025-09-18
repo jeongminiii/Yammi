@@ -16,17 +16,16 @@ AsyncStorage를 통해 앱 재실행 시에도 장바구니가 유지됩니다.
 
 ## 🚀 로컬 실행 방법
 
-```bash
 git clone https://github.com/username/yammi.git
 cd yammi
 
 - 패키지 설치
-npm install
+  npm install
 
 - ios 빌드
-npx react-native run-ios
+  npx react-native run-ios
 
-### 폴더 구조
+## 폴더 구조
 
 Yammi/
 ├── App.tsx
@@ -46,7 +45,7 @@ Yammi/
 ├── ios/ # iOS 빌드 관련 파일
 └── package.json
 
-#### 🛠️ 기술 스택
+## 🛠️ 기술 스택
 
 Framework: React Native
 State Management: Redux Toolkit
@@ -55,4 +54,7 @@ Navigation: React Navigation
 Icons: react-native-vector-icons
 Build: Xcode (iOS), Gradle (Android)
 
-```
+상태관리: Redux
+비동기: axios
+스타일: StyleSheet
+스토리지: @react-native-async-storage/async-storage (장바구니/재시작 복원용)
