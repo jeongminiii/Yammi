@@ -76,16 +76,15 @@ const CartScreen = () => {
         }
       />
 
-      {/* 하단 총합 */}
       <View style={styles.footer}>
         <View style={styles.Row}>
-          <Text style={styles.total}>총 메뉴 수</Text>
-          <Text style={styles.total}>{totalQuantity}개</Text>
+          <Text style={styles.totalmenu}>총 메뉴 수</Text>
+          <Text style={styles.totalmenu}>{totalQuantity} 개</Text>
         </View>
 
         <View style={styles.Row}>
           <Text style={styles.total}>결제예정금액</Text>
-          <Text style={styles.total}> {total}원</Text>
+          <Text style={styles.total}> {total} 원</Text>
         </View>
         <View style={styles.Row}>
           <TouchableOpacity
@@ -155,12 +154,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 150,
+    height: 160,
     backgroundColor: '#fff',
     paddingVertical: 15,
-    paddingHorizontal: 20, // 내부 여백
+    paddingHorizontal: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
@@ -172,6 +172,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  totalmenu: {
+    fontSize: 16,
+
+    marginBottom: 15,
   },
   Row: {
     flexDirection: 'row',

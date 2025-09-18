@@ -28,7 +28,6 @@ const ProductDetail = ({ route, navigation }: any) => {
         price: product.salePrice,
         image: product.image,
         quantity: 1, //수량
-        originalprice: product.originalPrice,
       }),
     );
 
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 10,
-    alignItems: 'center', // 텍스트 가운데 정렬
+    alignItems: 'center',
   },
   buttonText: {
     color: 'white',
