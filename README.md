@@ -25,7 +25,7 @@ cd yammi
 - ios 빌드
   npx react-native run-ios
 
-## 폴더 구조
+# 폴더 구조
 
 Yammi/
 ├── App.tsx
@@ -36,11 +36,11 @@ Yammi/
 │ ├── data/
 │ │ ├── data.tsx # Mock Data
 │ │ └── symbol.png # 이미지
-│ └── screen/ #화면
-│ │ ├── Cart.tsx # 장바구니 화면
-│ │ ├── First.tsx # 홈 화면
-│ │ ├── ProductDetail.tsx # 상품 정보 화면
-│ │ └── ProductList.tsx # 상품 목록 화면
+│ └── screen/ # 화면
+│ ├── Cart.tsx # 장바구니 화면
+│ ├── First.tsx # 홈 화면
+│ ├── ProductDetail.tsx # 상품 정보 화면
+│ └── ProductList.tsx # 상품 목록 화면
 ├── android/ # Android 빌드 관련 파일
 ├── ios/ # iOS 빌드 관련 파일
 └── package.json
